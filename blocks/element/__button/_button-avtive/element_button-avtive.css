@@ -1,0 +1,14 @@
+.element_button-avtive {
+    background-image: url(../../../../image/active-heart.svg);
+    background-repeat: no-repeat;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 22px;
+    height: 19px;
+}
+
+.element_button-avtive:hover {
+    opacity: 1;
+}
