@@ -3,12 +3,16 @@
     height: 19px;
     background-image: url(../../../image/disabled-heart.svg);
     background-repeat: no-repeat;
-    background-color: white;
+    background-color: none;
+    background-color: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
-}
+    opacity: 1;
+    transition:opacity 0.3s , 0.3s linear;
+    
+};
 
 .element__button:hover {
     opacity: 0.5;
-}
+};
