@@ -10,11 +10,12 @@
     padding: 0;
     top: 20px;
     cursor: pointer;
-    transition: opacity 0.3s, linear 0.3s ;
+    transition: opacity 0.3s linear;
     opacity: 1;
-};
+    
+}
 
-.element__button-trash:focus{
-
+.element__button-trash:hover{
     opacity: 0.6;
-}; 
+
+}

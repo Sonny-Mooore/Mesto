@@ -21,12 +21,11 @@ const initialCards = [
     link: 'https://images.unsplash.com/photo-1503394186783-bdcdf2f6d0cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80'
   },
   {
-    name: 'Kyoto, Japon',
+    name: 'Kyoto, Japаn',
     link: 'https://images.unsplash.com/photo-1624253321171-1be53e12f5f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80'
   }
 ];
 
-// console.log(initialCards);
 
 
 const wrapper = document.querySelector('.wrapper')
@@ -43,15 +42,7 @@ const jobInput = wrapper.querySelector('.popup__input_edit_job');
 const profileTitle = wrapper.querySelector('.profile__title');
 const profileSubtitle = wrapper.querySelector('.profile__subtitle');
 
-
-
-
-
-
 //updates 
-// const elementCard = wrapper.querySelector('.element');
-
-
 const profileAddCard = wrapper.querySelector('.profile__add-card');
 
 const popupEditPrifile = wrapper.querySelector('.popup_prifile-edit');
@@ -62,49 +53,11 @@ const inputCardLink = popupAddCard.querySelector('.popup__input_card_link');
 
 const elementOfList = wrapper.querySelectorAll('.element');
 const elementsList = document.querySelector('.elements');
-// const elementBtnLike = document.querySelectorAll('.element__button');
+const elementBtnLike = elementsList.querySelectorAll('.element__button');
 const elementTrashButton = elementsList.querySelectorAll('.element__button-trash');
+const popupZoom = wrapper.querySelector('.popup_zoom')
+const template = document.querySelector('.template__card').content;
 
-
-//template test 
-// const template = document.getElementById('templateCard').content;
-// const elementAbout = document.querySelector('.element__about')
-
-// const clone = template.cloneNode(true);
-// // clone.append(clone)
-// elementsList.appendChild(clone)
-
-
-// console.log(template);
-
-// console.log(elementsList);
-
-// const setLike = () => elementBtnLike.classList.toggle('.element_button-active');
-
-
-
-
-// elementsList.addEventListener('click', function (event) {
-//   if (event.target.closest('.element__button')) {
-//       elementBtnLike.forEach(function(element){
-//       }) 
-//     }
-// });
-
-
-//кнопка лайка
-const elementBtnLike = document.querySelectorAll('.element__button')
-
-// вот это сделано коряво мог сделать по человекчесики,
-//эта колбэек фнукция по идее должна сначала находить все добавленные кнопки в карточках, и менять стили
-// НО ЕСЛИ Я ВЫВОЖУ В КОНСОЛЬ ЛОГ ПЕРЕМЕННУЮ С ЛАЙКОМ, то почему то он не находит все эти кнопки 
-console.log(elementBtnLike); /* nodelist пустой ?? */
-elementBtnLike.forEach(elementBtnLike => {
-  elementBtnLike.addEventListener('click', function () {
-    console.log('sd');
-    elementBtnLike.classList.toggle('.element_button-active')
-  })
-});
 
 
 
@@ -113,67 +66,59 @@ const handleCardButton = addCardPopup.querySelector('.popup__submit_card_submit'
 //кнопка редактирования профиля 
 const handleEditButton = addCardPopup.querySelector('.popup__submit_edit_submit');
 
-//функция добавлениякарточки
-function addCard(name, link) {
+// //функция добавления карточки
+function addNewCard(name,link) {
+  const templateClone = template.cloneNode(true);
 
-  const divCard = document.createElement('div');
-  divCard.classList.add('element');
+  setNewListeners(templateClone) 
+  template.querySelector('.element__image').src = link;
+  template.querySelector('.element__title').textContent = name;
+  template.querySelector('.element__button-trash').addEventListener('click',cardDelete)
+  template.querySelector('.element__button').addEventListener('click',addLike)
+  template.querySelector('.element__image').addEventListener('click', zoomPopupImage)
 
-  const imgCard = document.createElement('img');
-  imgCard.classList.add('element__image');
-  imgCard.setAttribute('src', link,)
-  divCard.append(imgCard);
+  console.log(templateClone);
+  elementsList.prepend(templateClone)
 
-  const buttonCardTrash = document.createElement('button');
-  buttonCardTrash.classList.add('element__button-trash');
-  buttonCardTrash.setAttribute('type', 'button');
-  divCard.append(buttonCardTrash);
+  //return templateClone;
+}
 
-  const div = document.createElement('div');
-  div.classList.add('element__about');
-  divCard.append(div);
-
-  const h2Card = document.createElement('h2');
-  h2Card.classList.add('element__title');
-  h2Card.innerText = name;
-  div.append(h2Card);
-
-  const buttonCardLike = document.createElement('button');
-  buttonCardLike.classList.add('element__button');
-  buttonCardTrash.setAttribute('type', 'button');
-  div.append(buttonCardLike);
-
-  return elementsList.prepend(divCard)
-};
-
-
-// const deleteCard = () => elementsList.remove();
-
-// elementTrashButton.forEach((el) => {
-//   // console.log(el);
-// });
-// console.log(elementTrashButton );
-
-// function openPopupCard(){
-
-// }
-
-
-//функция отправки формы через нажатия кнопки
+//функция отправки формы после нажатия сабмита
 function handleCardSubmit(evt) {
   evt.preventDefault()
 
   let nameCardValue = inputCardName.value;
   let linkCardValue = inputCardLink.value;
 
-  addCard(nameCardValue, linkCardValue)
+  addNewCard(nameCardValue, linkCardValue)
   evt.target.reset()
   closePopup()
 };
 
-// function clearForm() {
+function setNewListeners(event) {
+  event.querySelector('.element__button').addEventListener('click',addLike)
+  event.querySelector('.element__image').addEventListener('click', zoomPopupImage)
+  event.querySelector('.element__button-trash').addEventListener('click',cardDelete)
+} 
 
-// }
+//функция добавлвение карточек по умолчанию 
+initialCards.forEach(renderCard)
+
+function renderCard(item){
+  const templateClone = template.cloneNode(true)
+  const nameCard = item.name
+  const linkCard = item.link
+    //тут присваеваю картинке ссылку и имя картинки
+    
+    templateClone.querySelector('.element__image').src = linkCard;
+    templateClone.querySelector('.element__image').alt = nameCard;
+    templateClone.querySelector('.element__title').textContent = nameCard;
+    setNewListeners(templateClone) 
+  
+  
+    elementsList.append(templateClone)
+}
+
 
 popupAddCard.addEventListener('submit', handleCardSubmit);
 
@@ -182,6 +127,7 @@ popupAddCard.addEventListener('submit', handleCardSubmit);
 function closePopup() {
   popupAddCard.classList.remove('popup_opened')
   popupEditPrifile.classList.remove('popup_opened')
+  popupZoom.classList.remove('popup_opened')
 };
 
 // функция открытие формы редактирваия 
@@ -215,67 +161,18 @@ closePopupBtns.forEach((el) => {
   el.addEventListener('click', () => closePopup());
 });
 
-//цикл, добавляющий из массива initialCards в разметку, в тег elements
-for (let i = 0; i < initialCards.length; i++) {
+function addLike(item) {
+  let likeBtn = item.target
+  likeBtn.classList.toggle('element_button-active')
+}
+function cardDelete(item) {
+  let removeBtn = item.target.closest('.element')
+  removeBtn.remove()
+}
 
-  const element = initialCards[i];
-  //переменные для взятия конкретных свойств из массива 
-  const nameCard = initialCards[i].name
-  const linkCard = initialCards[i].link
-
-  elementsList.insertAdjacentHTML('beforeEnd', `
-  <div class="element">
-    <img class="element__image" src="${linkCard}" alt="картинка">
-    <button type="button" class="element__button-trash"></button>
-    <div class="element__about">
-      <h2 class="element__title">${nameCard}</h2>
-      <button type="button" class="element__button"></button>
-    </div>
-  </div>
-`)
-};
-
-
-
-// initialCards.forEach((element)=>{
-//   const nameCard = initialCards.name
-//   const linkCard = initialCards.link
-//    elementsList.insertAdjacentHTML('afterbegin'`
-//                   <div class="element">
-//                       <img class="element__image" src="${linkCard}" alt="Гора Эльбрус">
-//                       <button type="button" class="element__button-trash"></button>
-//                       <div class="element__about">
-//                           <h2 class="element__title">${nameCard}</h2>
-//                           <button type="button" class="element__button"></button>
-//                       </div>
-//                   </div>`
-//   // console.log(nameCard,linkCard);
-// })
-
-
-//функция отрисовки карты 
-// function renderCard() {
-//    elementsList.insertAdjacentHTML('afterbegin'`
-//                   <div class="element">
-//                       <img class="element__image" src="${linkCard}" alt="Гора Эльбрус">
-//                       <button type="button" class="element__button-trash"></button>
-//                       <div class="element__about">
-//                           <h2 class="element__title">${nameCard}</h2>
-//                           <button type="button" class="element__button"></button>
-//                       </div>
-//                   </div>`
-// )}
-
-//   initialCards.forEach();
-
-  //template способ
-    // const cardTemplate = document.getElementById('templateCard').content;
-    // console.log(cardTemplate);
-
-    // const CardHtml = cardTemplate.cloneNode(true);
-    //   console.log(cardTemplate.querySelector('.element__title').textContent = 'text');
-    //   elementsList.append(CardHtml)
-  //  
-
-
+function zoomPopupImage(image) {
+  wrapper.querySelector('.popup__zoom-image').src = image.target.src;
+  wrapper.querySelector('.popup__zoom-title').textContent = image.target.alt;
+  popupZoom.classList.toggle('popup_opened')
+}
 

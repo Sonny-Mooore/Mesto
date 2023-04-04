@@ -18,7 +18,7 @@
             <section class="profile">
                 <img class="profile__avatar" src="./image/ded.png" alt="Жак-Ив Кусто">
                 <div class="profile__info">
-                    <div class="profile__edit" >
+                    <div class="profile__edit">
                         <h1 class="profile__title profile__title_name ">Жак-Ив Кусто</h1>
                         <button type="button" class="profile__button"></button>
                     </div>
@@ -27,68 +27,21 @@
                 <button type="button" class="profile__add-card"></button>
             </section>
             <section class="elements">
-                <!-- <div class="element">
-                    <img class="element__image" src="./image/kirill-1.jpg" alt="Карачаевск">
-                    <button type="button" class="element__button-trash"  ></button>
-                    <div class="element__about">
-                        <h2 class="element__title">Карачаевск</h2>
-                        <button type="button" class="element__button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./image/kirill-2.jpg" alt="Гора Эльбрус">
-                    <button type="button" class="element__button-trash"></button>
-                    <div class="element__about">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button type="button" class="element__button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./image/kiril-3.jpg" alt="Домбай">
-                    <button type="button" class="element__button-trash"></button>
-                    <div class="element__about">
-                        <h2 class="element__title">Домбай</h2>
-                        <button type="button" class="element__button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./image/kirill-2.jpg" alt="Гора Эльбрус">
-                    <button type="button" class="element__button-trash"></button>
-                    <div class="element__about">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button type="button" class="element__button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./image/kiril-3.jpg" alt="Домбай">
-                    <button type="button" class="element__button-trash"></button>
-                    <div class="element__about">
-                        <h2 class="element__title">Домбай</h2>
-                        <button type="button" class="element__button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./image/kirill-1.jpg" alt="Карачаево-Черкесская">
-                    <button type="button" class="element__button-trash"></button>
-                    <div class="element__about">
-                        <h2 class="element__title">Карачаево-Черкесская</h2>
-                        <button type="button" class="element__button"></button>
-                    </div>
-                </div> -->
+
             </section>
         </main>
         <footer class="footer">
             <p class="footer__text">© 2020 Mesto Russia</p>
         </footer>
-        <template id="templateCard">
-                <div>
-                    <img class="element__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" alt="картинка">
-                    <button type="button" class="element__button-trash"></button>
-                    <div class="element__about">
-                        <h2 class="element__title">sdsd</h2>
-                        <button type="button" class="element__button"></button>
-                    </div>
-                </div>    
+        <template class="template__card">
+            <div class="element">
+                <img class="element__image" src="" alt="">
+                <button type="button" class="element__button-trash"></button>
+                <div class="element__about">
+                    <h2 class="element__title"></h2>
+                    <button type="button" class="element__button"></button>
+                </div>
+            </div>
         </template>
         <div class="popup popup_prifile-edit ">
             <div class="popup__container">
@@ -115,6 +68,15 @@
                     <button type="submit" class="popup__submit popup__submit_card_submit">Создать</button>
                 </form>
             </div>
+        </div>
+        <div class="popup popup_zoom">
+            <div class="popup__zoom-conteiner">
+                <img class="popup__zoom-image" src="" alt="">
+                <button class="popup__closed"></button>
+                <p class="popup__zoom-title"></p>
+
+            </div>
+
         </div>
     </div>
 
