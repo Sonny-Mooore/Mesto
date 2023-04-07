@@ -1,13 +1,13 @@
 // //функция добавления карточки
-function addCard(object) {
+function addCard(cardData) {
   const element = templateCard.cloneNode(true);
-  setNewListeners(element);
+  setCardListeners(element);
   const elementImage = element.querySelector(".element__image");
   const elementTitle = element.querySelector(".element__title");
 
-  elementImage.src = object.link;
-  elementTitle.textContent = object.name;
-  elementImage.alt = object.name;
+  elementImage.src = cardData.link;
+  elementTitle.textContent = cardData.name;
+  elementImage.alt = cardData.name;
 
   return element;
 }
@@ -15,8 +15,8 @@ function addCard(object) {
 //функция добавление карточек по умолчанию
 initialCards.forEach(renderCard);
 
-function renderCard(object) {
-  const element = addCard(object);
+function renderCard(cardData) {
+  const element = addCard(cardData);
   elementsList.prepend(element);
 }
 
@@ -30,7 +30,7 @@ function handleCardSubmit(evt) {
 }
 popupAddCard.addEventListener("submit", handleCardSubmit);
 
-function setNewListeners(event) {
+function setCardListeners(event) {
   event.querySelector(".element__button").addEventListener("click", addLike);
   event
     .querySelector(".element__image")
@@ -58,7 +58,7 @@ function closePopup(popup) {
 }
 
 // в этой функции присваеваем данные введеные с инпута в профиль
-function handleFormSubmit(evt) {
+function submitEditProfileForm(evt) {
   evt.preventDefault();
 
   profileTitle.textContent = nameInputEditForm.value;
@@ -66,10 +66,10 @@ function handleFormSubmit(evt) {
 
   closePopup(popupEditProfile);
 }
-popupEditProfile.addEventListener("submit", handleFormSubmit);
+popupEditProfile.addEventListener("submit", submitEditProfileForm);
 
 profileAddCardButton.addEventListener("click", () => {
-  popupAddCard.classList.add("popup_opened");
+  openPopup(popupAddCard)
 });
 
 closePopupButtonIcons.forEach((el) => {
@@ -86,10 +86,8 @@ function handleCardDelete(item) {
   removeBtn.remove();
 }
 function zoomPopupImage(image) {
-  const popupZoomTitle = document.querySelector(".popup__zoom-title");
-  const popupZoomImage = document.querySelector(".popup__zoom-image");
   popupZoomTitle.textContent = image.target.alt;
   popupZoomImage.alt = image.target.alt;
   popupZoomImage.src = image.target.src;
-  popupZoom.classList.toggle("popup_opened");
+  openPopup(popupZoom);
 }
