@@ -1,0 +1,6 @@
+.popup__submit_invalid {
+    background-color:white;
+    border: 1px rgba(0, 0, 0, 0.2) solid;
+    cursor:not-allowed;
+    color: rgba(0, 0, 0, 0.5);
+}

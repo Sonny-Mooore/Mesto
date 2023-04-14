@@ -60,3 +60,6 @@ const templateCard = document.querySelector(".template__card").content;
 const element = templateCard.cloneNode(true);
 const popupZoomTitle = document.querySelector(".popup__zoom-title");
 const popupZoomImage = document.querySelector(".popup__zoom-image");
+
+
+
