@@ -6,6 +6,7 @@ function addCard(cardData) {
   const elementTitle = element.querySelector(".element__title");
 
   elementImage.src = cardData.link;
+
   elementTitle.textContent = cardData.name;
   elementImage.alt = cardData.name;
 
@@ -43,8 +44,8 @@ function setCardListeners(event) {
 // функция открытие попапа
 function openPopup(popup) {
   popup.classList.add("popup_opened");
-  document.addEventListener('keydown',closePopupEscape)
-  popup.addEventListener('mousedown',closePopupOwerlay)
+  document.addEventListener("keydown", closePopupEscape);
+  popup.addEventListener("mousedown", closePopupOwerlay);
 }
 
 function openPopupFormEdit() {
@@ -57,8 +58,8 @@ profileEditButton.addEventListener("click", openPopupFormEdit);
 // функция закрытия попапа
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
-  document.removeEventListener('keydown', closePopupEscape)
-  popup.removeEventListener('mousedown', closePopupOwerlay)
+  document.removeEventListener("keydown", closePopupEscape);
+  popup.removeEventListener("mousedown", closePopupOwerlay);
 }
 
 // в этой функции присваеваем данные введеные с инпута в профиль
@@ -73,7 +74,7 @@ function submitEditProfileForm(evt) {
 popupEditProfile.addEventListener("submit", submitEditProfileForm);
 
 profileAddCardButton.addEventListener("click", () => {
-  openPopup(popupAddCard)
+  openPopup(popupAddCard);
 });
 
 closePopupButtonIcons.forEach((el) => {
@@ -97,16 +98,17 @@ function zoomPopupImage(image) {
 }
 
 // функции закрития попапа с помошью ESC и кликом на оверлей
+
 const closePopupEscape = (event) => {
-  if(event.key === 'Escape'){
-    const openPopup = document.querySelector('.popup_opened')
-    closePopup(openPopup)
+  if (event.key === "Escape") {
+    const openPopup = document.querySelector(".popup_opened");
+
+    closePopup(openPopup);
   }
-}
+};
+
 const closePopupOwerlay = (event) => {
- if(event.target === event.currentTarget){
-    closePopup(event.currentTarget)
+  if (event.target === event.currentTarget) {
+    closePopup(event.currentTarget);
   }
-}
-
-
+};
