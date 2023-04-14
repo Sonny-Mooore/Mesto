@@ -20,15 +20,11 @@ const enableValidation = ({formSelector, ...rest}) => {
     })
 };
 
-const setEventListeners = (FormToValidate, {inputSelector, submitButtonSelector, ...rest} ) => {
-    
+const setEventListeners = (FormToValidate, {inputSelector, submitButtonSelector, ...rest} ) => {    
     const formInputs = Array.from(FormToValidate.querySelectorAll(inputSelector));
     console.log(formInputs);
-    
     const formButton = FormToValidate.querySelector(submitButtonSelector);
-    
     disableButton(formButton, rest)
-
     formInputs.forEach( (input) =>{
         input.addEventListener('input', () => {
             checkInputValidity(input, rest)
@@ -47,7 +43,6 @@ function hasInvalidInput (formInputs) {
 
 const checkInputValidity = (input, {invalidInputClass, ...rest}) =>{
     const currentInputError = document.querySelector(`#${input.id}-error`);
-    console.log(currentInputError);
 
     if (input.checkValidity()) {
         currentInputError.textContent = '';
@@ -55,7 +50,6 @@ const checkInputValidity = (input, {invalidInputClass, ...rest}) =>{
         currentInputError.textContent = input.validationMessage;
     }
 };
-
 
 function disableButton(button, {inactiveButtonClass, activeButtonClass } ){
     button.classList.add(inactiveButtonClass)    
@@ -70,7 +64,5 @@ function enableButton(button, {inactiveButtonClass, activeButtonClass} ) {
     button.removeAttribute('disabled')
 
 };
-
-
 
 enableValidation(ValidationConfig)
