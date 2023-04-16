@@ -30,7 +30,7 @@ const wrapper = document.querySelector(".wrapper");
 const addCardButton = wrapper.querySelector(".popup_add-card");
 // const submitFormButton = wrapper.querySelector(".popup_prifile");
 
-const PopupItem = wrapper.querySelectorAll(".popup");
+const PopupItems = wrapper.querySelectorAll(".popup");
 // allPopup.forEach()
 const closePopupButtonIcons = wrapper.querySelectorAll(".popup__closed");
 

@@ -32,7 +32,7 @@ function handleCardSubmit(evt) {
 popupAddCard.addEventListener("submit", handleCardSubmit);
 
 function setCardListeners(event) {
-  event.querySelector(".element__button").addEventListener("click", addLike);
+  event.querySelector(".element__button").addEventListener("click", toggleLike);
   event
     .querySelector(".element__image")
     .addEventListener("click", zoomPopupImage);
@@ -45,7 +45,7 @@ function setCardListeners(event) {
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupEscape);
-  popup.addEventListener("mousedown", closePopupOwerlay);
+  popup.addEventListener("mousedown", closePopupOverlay);
 }
 
 function openPopupFormEdit() {
@@ -59,7 +59,7 @@ profileEditButton.addEventListener("click", openPopupFormEdit);
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupEscape);
-  popup.removeEventListener("mousedown", closePopupOwerlay);
+  popup.removeEventListener("mousedown", closePopupOverlay);
 }
 
 // в этой функции присваеваем данные введеные с инпута в профиль
@@ -82,7 +82,7 @@ closePopupButtonIcons.forEach((el) => {
   el.addEventListener("click", () => closePopup(closebutton));
 });
 
-function addLike(item) {
+function toggleLike(item) {
   const likeBtn = item.target;
   likeBtn.classList.toggle("element_button-active");
 }
@@ -107,7 +107,7 @@ const closePopupEscape = (event) => {
   }
 };
 
-const closePopupOwerlay = (event) => {
+const closePopupOverlay = (event) => {
   if (event.target === event.currentTarget) {
     closePopup(event.currentTarget);
   }
