@@ -28,10 +28,9 @@ const initialCards = [
 const wrapper = document.querySelector(".wrapper");
 //кнопки редактирования
 const addCardButton = wrapper.querySelector(".popup_add-card");
-// const submitFormButton = wrapper.querySelector(".popup_prifile");
 
 const PopupItems = wrapper.querySelectorAll(".popup");
-// allPopup.forEach()
+
 const closePopupButtonIcons = wrapper.querySelectorAll(".popup__closed");
 
 //все попапы
