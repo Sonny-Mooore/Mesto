@@ -33,7 +33,7 @@
         <footer class="footer">
             <p class="footer__text">© 2020 Mesto Russia</p>
         </footer>
-        <template class="template__card">
+        <template id="templateCard" class="template__card">
             <div class="element">
                 <img class="element__image" >
                 <button type="button" class="element__button-trash"></button>
@@ -43,13 +43,12 @@
                 </div>
             </div>
         </template>
-
         <div class="popup popup_profile-edit ">
             <div class="popup__container">
                 <button type="button" class="popup__closed "></button>
                 <h3 class="popup__text">Редактировать профиль</h3>
 
-                <form method="post" name="editFormPopup" class="popup__form">
+                <form method="post" name="popupEditForm" class="popup__form">
 
                     <input minlength="2" maxlength="40" required id="profile-name" placeholder="Введите имя" value="" class="popup__input popup__input_edit_name " type="text">
 
@@ -65,12 +64,11 @@
 
             </div>
         </div>
-
         <div class="popup popup_add-card ">
             <div class="popup__container">
                 <button type="button" class="popup__closed"></button>
                 <h3 class="popup__text">Новое место</h3>
-                <form method="post" name="popupForm" class="popup__form">
+                <form method="post" name="popupAddCardForm" class="popup__form">
 
                     <input id="card-name" minlength="2" maxlength="30" required  placeholder="Название" value="" class="popup__input popup__input_card_name " type="text">
 
@@ -94,10 +92,12 @@
             </div>
 
         </div>
-    </div>
-    <script src="./scripts/validate.js"></script>
-    <script src="./scripts/constants.js"></script>
-    <script src="./scripts/index.js"></script>
+    </div>    
+    <!-- <script src="./scripts/constants.js"></script>
+    <script src="./scripts/card.js"></script> -->
+    <script type="module" src="./scripts/index.js"></script>
+
+
     
 </body>
 
