@@ -1,4 +1,4 @@
-import {initialCards} from "./constants.js";
+import { initialCards } from "./constants.js";
 import Card from './card.js'
 import FormValidator from './FormValidator.js';
 
@@ -25,8 +25,8 @@ const profileAddCardButton = wrapper.querySelector(".profile__add-card");
 
 const nameInputEditForm = wrapper.querySelector(".popup__input_edit_name");
 const jobInputEditForm = wrapper.querySelector(".popup__input_edit_job");
-const popupAddCardForm =document.forms.popupAddCardForm;
-const popupEditForm =document.forms.popupEditForm;
+const popupAddCardForm = document.forms.popupAddCardForm;
+const popupEditForm = document.forms.popupEditForm;
 
 const inputCardName = popupAddCard.querySelector(".popup__input_card_name");
 const inputCardLink = popupAddCard.querySelector(".popup__input_card_link");
@@ -48,23 +48,23 @@ const validationConfig = {
 };
 
 // //функция добавления карточки
-const formPersonalEditValidaton = new FormValidator(ValidationConfig, popupEditForm)
+const formPersonalEditValidaton = new FormValidator(validationConfig, popupEditForm)
 
 formPersonalEditValidaton.enableValidation()
 
-const formAddCardValidaton = new FormValidator(ValidationConfig, popupAddCardForm)
+const formAddCardValidaton = new FormValidator(validationConfig, popupAddCardForm)
 
 formAddCardValidaton.enableValidation()
 
-function addCard(container, card){
+function addCard(container, card) {
   container.prepend(card);
 }
 
 function createCard(card) {
 
-const elementCard = new Card(card, templateCard, zoomPopupImage);
-const cardElement = elementCard.addCard();
-return cardElement
+  const elementCard = new Card(card, templateCard, zoomPopupImage);
+  const cardElement = elementCard.addCard();
+  return cardElement
 
 }
 
@@ -72,20 +72,20 @@ return cardElement
 function handleCardSubmit(evt) {
   evt.preventDefault();
 
-  const object = {name: inputCardName.value, link: inputCardLink.value};
+  const object = { name: inputCardName.value, link: inputCardLink.value };
+
+
+  addCard(elementsList, createCard(object))
   
-  const newCard = new Card(object, templateCard, zoomPopupImage);
-   
-  elementsList.prepend(newCard.addCard());
 
-   closePopup(popupAddCard);
+  closePopup(popupAddCard);
 
-   evt.target.reset();
+  evt.target.reset();
 }
 popupAddCard.addEventListener("submit", handleCardSubmit);
 
- 
-initialCards.forEach((item) => { 
+
+initialCards.forEach((item) => {
   addCard(elementsList, createCard(item))
 });
 

@@ -26,5 +26,4 @@ export const initialCards = [
   },
 ];
 
-// export default initialCards;
 
