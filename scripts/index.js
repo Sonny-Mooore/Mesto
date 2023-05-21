@@ -48,11 +48,11 @@ const validationConfig = {
 };
 
 // //функция добавления карточки
-const formPersonalEditValidaton = new FormValidator(ValidationConfig, popupEditForm)
+const formPersonalEditValidaton = new FormValidator(validationConfig, popupEditForm)
 
 formPersonalEditValidaton.enableValidation()
 
-const formAddCardValidaton = new FormValidator(ValidationConfig, popupAddCardForm)
+const formAddCardValidaton = new FormValidator(validationConfig, popupAddCardForm)
 
 formAddCardValidaton.enableValidation()
 
