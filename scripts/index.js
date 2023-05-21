@@ -6,7 +6,7 @@ const wrapper = document.querySelector(".wrapper");
 //кнопки редактирования
 const addCardButton = wrapper.querySelector(".popup_add-card");
 
-const PopupItems = wrapper.querySelectorAll(".popup");
+const popupItems = wrapper.querySelectorAll(".popup");
 
 const closePopupButtonIcons = wrapper.querySelectorAll(".popup__closed");
 
@@ -38,7 +38,7 @@ const templateCard = ".template__card";
 const popupZoomTitle = document.querySelector(".popup__zoom-title");
 const popupZoomImage = document.querySelector(".popup__zoom-image");
 
-const ValidationConfig = {
+const validationConfig = {
   // formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit",
@@ -48,14 +48,24 @@ const ValidationConfig = {
 };
 
 // //функция добавления карточки
-const formPersonalEditValidaton = new FormValidator(ValidationConfig, popupEditForm)
-console.log(formPersonalEditValidaton);
+const formPersonalEditValidaton = new FormValidator(validationConfig, popupEditForm)
 formPersonalEditValidaton.enableValidation()
 
-const formAddCardValidaton = new FormValidator(ValidationConfig, popupAddCardForm)
-console.log(formAddCardValidaton);
+const formAddCardValidaton = new FormValidator(validationConfig, popupAddCardForm)
 formAddCardValidaton.enableValidation()
 
+function addCard(container, card){
+  container.prepend(card);
+
+}
+
+function createCard(card) {
+
+const elementCard = new Card(card, templateCard, zoomPopupImage);
+const cardElement = elementCard.addCard();
+return cardElement
+
+}
 
 // функция отправки формы после нажатия сабмита
 function handleCardSubmit(evt) {
@@ -66,7 +76,6 @@ function handleCardSubmit(evt) {
   const newCard = new Card(object, templateCard, zoomPopupImage);
    
   elementsList.prepend(newCard.addCard());
-   
 
    closePopup(popupAddCard);
 
@@ -76,8 +85,7 @@ popupAddCard.addEventListener("submit", handleCardSubmit);
 
  
 initialCards.forEach((item) => { 
-  const elementCard = new Card(item, templateCard, zoomPopupImage);
-  elementsList.prepend(elementCard.addCard());
+  addCard(elementsList, createCard(item))
 });
 
 // // функция открытие попапа

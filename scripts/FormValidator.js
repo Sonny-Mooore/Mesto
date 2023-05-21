@@ -39,6 +39,7 @@ export default class FormValidator {
         })
       })
     }
+    
     _hideErrorInput = (spanErrorElement,input)=>{
       input.classList.remove(this._invalidInputClass)
       spanErrorElement.textContent = ''
