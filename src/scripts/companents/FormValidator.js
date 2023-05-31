@@ -6,8 +6,8 @@ export default class FormValidator {
       this._inactiveButtonClass = ValidateConfig.inactiveButtonClass;
       this._activeButtonClass = ValidateConfig.activeButtonClass;
       this._form = Form
-      this._submitButton =  this._form.querySelector(this._submitButtonSelector)
-      this._inputs =  this._form .querySelectorAll(this._inputSelector)
+      this._submitButton = this._form.querySelector(this._submitButtonSelector)
+      this._inputs = this._form.querySelectorAll(this._inputSelector)
     }
   
     _enableButton(){
