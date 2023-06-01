@@ -31,15 +31,11 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/element/__button-trash/element__button-trash.css);
 @import url(../blocks/popup/__zoom-conteiner/popup__zoom-conteiner.css);
-@import url(../blocks/popup/_zoom/popup_zoom.css);
 @import url(../blocks/popup/__zoom-image/popup__zoom-image.css);
 @import url(../blocks/popup/__zoom-title/popup__zoom-image.css);
-
 @import url(../blocks/popup/__form-error/popup__form-error.css);
-
 @import url(../blocks/popup/__input/_invalid/popup__form-input_invalid.css);
 @import url(../blocks/popup/__submit/_invalid/popup__submit_invalid.css);
-
 @import url(../blocks/popup/__submit/_valid/popup__submit_valid.css);
 
 

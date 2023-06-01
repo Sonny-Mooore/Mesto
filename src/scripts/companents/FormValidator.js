@@ -1,10 +1,10 @@
 export default class FormValidator {
-    constructor(ValidateConfig, Form){
-      this._inputSelector =  ValidateConfig.inputSelector; 
-      this._submitButtonSelector =ValidateConfig.submitButtonSelector;
-      this._invalidInputClass  = ValidateConfig.invalidInputClass;
-      this._inactiveButtonClass = ValidateConfig.inactiveButtonClass;
-      this._activeButtonClass = ValidateConfig.activeButtonClass;
+    constructor(validateConfig, Form){
+      this._inputSelector =  validateConfig.inputSelector; 
+      this._submitButtonSelector =validateConfig.submitButtonSelector;
+      this._invalidInputClass  = validateConfig.invalidInputClass;
+      this._inactiveButtonClass = validateConfig.inactiveButtonClass;
+      this._activeButtonClass = validateConfig.activeButtonClass;
       this._form = Form
       this._submitButton = this._form.querySelector(this._submitButtonSelector)
       this._inputs = this._form.querySelectorAll(this._inputSelector)
@@ -55,7 +55,7 @@ export default class FormValidator {
     }
   
   
-    resetErrorInput(){
+    resetValidationState(){
       this._inputs.forEach((input) => {
         const spanErrorElement = this._form.querySelector(`#${input.id}-error`)
         if (!input.validity.valid) {

@@ -7,12 +7,12 @@ export default class Card {
 
     }
   
-    _tempateItemClone(){
+    _cloneTemplateItem(){
       return document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true)
     }
   
-    addCard(){
-      this._elementCloneCard = this._tempateItemClone()
+    renderCard(){
+      this._elementCloneCard = this._cloneTemplateItem()
       this._elementlikeButton = this._elementCloneCard.querySelector('.element__button')
       this._elementImage = this._elementCloneCard.querySelector('.element__image')
       this._elementTrashButton = this._elementCloneCard.querySelector('.element__button-trash')
