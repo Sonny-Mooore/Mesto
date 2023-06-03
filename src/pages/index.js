@@ -79,24 +79,15 @@ popupWithImageClass.setEventListeners()
 
 
 
-
-
 function createNewCard(element) {
   const elementCard = new Card(element, templateCardSelector, popupWithImageClass.open, PopupCardDeleteClass.open)
   return elementCard.renderCard();
 }
 
-
-
-
-
 const sectionClass = new Section({items: initialCards, renderer: (element) => {
 sectionClass.addItem(createNewCard(element))
   }
 }, elementsListSelector)
-
-// sectionClass.addCardArray()
-
 
 
 const popupAddCardClass = new PopupWithForm(popupAddCardSelector, (data) => {

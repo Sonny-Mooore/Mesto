@@ -10,7 +10,6 @@ export default class Api{
         return res.ok ? res.json() : Promise.reject 
     } 
 
-  
 
         
     getUserInfo(){
@@ -25,7 +24,7 @@ export default class Api{
     getDefaultCards(){
         return fetch(`${this._url}/cards`, {
             headers:{
-                authorization: this._authorization
+                authorization: this._headers.authorization
             }
         }).then(this._checkResponse)
     }
@@ -34,7 +33,7 @@ export default class Api{
         console.log(data);
         return fetch(`${this._url}/users/me`, {
             method:'PATCH',
-            header: this._headers, 
+            headers: this._headers, 
             body: JSON.stringify({
                 name: data.userName, 
                 about: data.userjob

@@ -3,6 +3,7 @@ export default class UserInfo {
         this._profileTitle = document.querySelector(profileTitleSelector)
         this._profileJob = document.querySelector(profileJobSelector)
         this._profileAvatar = document.querySelector(profileAvatarSelector)
+        
     }
 
     getUserInfo = () => {
