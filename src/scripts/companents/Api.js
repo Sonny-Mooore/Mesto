@@ -3,7 +3,7 @@ export default class Api{
         this._url = parameters.baseUrl
         this._headers = parameters.headers
         this._authorization = parameters.headers.authorization
-        console.log(this._url);
+
     }
 
     _checkResponse (res) {
@@ -30,7 +30,7 @@ export default class Api{
     }
     
     setUserInfo(data){
-        console.log(data);
+        // console.log(data);
         return fetch(`${this._url}/users/me`, {
             method:'PATCH',
             headers: this._headers, 
@@ -38,6 +38,19 @@ export default class Api{
                 name: data.userName, 
                 about: data.userjob
             })
+        }).then(this._checkResponse)
+    }
+
+
+    setAvatar(data){
+        console.log(data);
+        fetch(`${this._url}/users/me/avatar`, {
+            method:'PATCH',
+            headers: this._headers, 
+            body: JSON.stringify({
+              avatar: data.avatar
+            })
+          
         }).then(this._checkResponse)
     }
 
