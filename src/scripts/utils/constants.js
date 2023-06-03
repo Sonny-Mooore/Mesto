@@ -26,4 +26,16 @@ export const initialCards = [
   },
 ];
 
+export const validationConfig = {
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  invalidInputClass: "popup__form-input_invalid",
+  inactiveButtonClass: "popup__submit_invalid",
+  activeButtonClass: "popup__submit_valid",
+};
 
+// export const profileConfigUser = {
+//    profileTitleSelector :".profile__title",
+//    profileSubtitleSelector : ".profile__subtitle",
+//    profileAvatarSelector: ".profile__avatar"
+// }

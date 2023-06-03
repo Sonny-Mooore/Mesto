@@ -1,9 +1,10 @@
 export default class Card {
-    constructor(cardData, templateSelector, zoomPopupImage ){
-      this._title = cardData.title;
+    constructor(cardData, templateSelector, zoomPopupImage, deletePopapOpen ){
+      this._title = cardData.name;
       this._link = cardData.link;
       this._templateSelector = templateSelector;
       this._zoomPopupImage = zoomPopupImage;
+      this._deletePopapOpen = deletePopapOpen;
 
     }
   
@@ -26,7 +27,11 @@ export default class Card {
   
     _toggleLike = () => this._elementlikeButton.classList.toggle("element_button-active");
   
-    _deleteCardButton = () => this._elementCloneCard.remove();
+    _deleteCardButton = () => {
+      // this._elementCloneCard.remove()
+
+      this._deletePopapOpen()
+    }
   
     _handlezoomPopupImage = () => this._zoomPopupImage({name:this._title, link:this._link})
   
@@ -35,4 +40,8 @@ export default class Card {
       this._elementImage.addEventListener("click", this._handlezoomPopupImage);
       this._elementTrashButton.addEventListener("click", this._deleteCardButton);
     }  
+
+    cardRemove(){
+      this._elementCloneCard.remove()
+    }
   }

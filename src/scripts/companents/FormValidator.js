@@ -8,6 +8,7 @@ export default class FormValidator {
       this._form = Form
       this._submitButton = this._form.querySelector(this._submitButtonSelector)
       this._inputs = this._form.querySelectorAll(this._inputSelector)
+
     }
   
     _enableButton(){
@@ -36,22 +37,25 @@ export default class FormValidator {
         input.addEventListener('input',() =>{
           this._checkInputValidity(input)
           this._toggleButtonClass()
-        })
+        }) 
       })
     }
     
     _hideErrorInput = (spanErrorElement,input)=>{
       input.classList.remove(this._invalidInputClass)
       spanErrorElement.textContent = ''
-    }
+    }  
     _showInputError = (spanErrorElement,input)=>{
       input.classList.add(this._invalidInputClass)
       spanErrorElement.textContent = input.validationMessage
     }
   
     _checkInputValidity = (input) => {
+
       const spanErrorElement = this._form.querySelector(`#${input.id}-error`)
+
       input.validity.valid ? this._hideErrorInput(spanErrorElement,input) : this._showInputError(spanErrorElement,input)
+
     }
   
   

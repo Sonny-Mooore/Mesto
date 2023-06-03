@@ -5,8 +5,8 @@ export default class Section{
         this._renderer = renderer 
     }
 
-    addCardArray(){
-        this._arrayItems.forEach((element) => {
+    addCardArray(dataCard){
+        dataCard.forEach((element) => {
             this._renderer(element)
         })
     }
