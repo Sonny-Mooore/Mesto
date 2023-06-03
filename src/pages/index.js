@@ -41,6 +41,29 @@ formPersonalEditValidaton.enableValidation()
 const formAddCardValidaton = new FormValidator(validationConfig, popupAddCardForm)
 formAddCardValidaton.enableValidation()
 //
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  headers: {
+    authorization: '8a43f496-a272-4f91-9a30-3f0499453648',
+    'Content-Type': 'application/json'
+  }
+})
+
+// api.getUserInfo().then(res => console.log(res))
+
+// api.getDefaultCards().then(res => console.log(res))
+
+Promise.all([api.getUserInfo(), api.getDefaultCards()]).then(([dataUser, dataCard]) => {
+
+  dataCard.forEach( (item) => { item.myid = dataUser._id})
+  
+  userInfo.setUserInfo({userName: dataUser.name, userjob: dataUser.about, avatar: dataUser.avatar})
+
+
+  sectionClass.addCardArray(dataCard)
+  
+
+})
  
 const PopupCardDeleteClass = new PopupCardDelete(popupCardDeleteSelector, (item) => {
   item.cardRemove()
@@ -87,8 +110,15 @@ profileAddCardButton.addEventListener("click", () => {
   popupAddCardClass.open()
 });
 
+
+
 const popupProfile = new PopupWithForm(popupEditProfileSelector, (data) => {
-  userInfo.setUserInfo(data)
+  // console.log(data);
+
+  api.setUserInfo(data).then((res) => console.log(res))
+
+  // userInfo.setUserInfo(data)
+
   popupProfile.close()
 })
 popupProfile.setEventListeners()
@@ -101,7 +131,7 @@ profileEditButton.addEventListener("click", () => {
 
 
 
-//
+
 
 const popupEditAvatarClass = new PopupWithForm(popupEditAvatarSelector, (data)=>{
   document.querySelector('.profile__avatar').src = data.avatar
@@ -117,42 +147,3 @@ const buttonAvatarOverlay  = document.querySelector('.profile__avatar-overlay').
   popupEditAvatarClass.open()
 })
 
-
-
-
-
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
-  headers: {
-    authorization: '8a43f496-a272-4f91-9a30-3f0499453648',
-    'Content-Type': 'application/json'
-  }
-})
-
-api.getUserInfo().then(res => console.log(res))
-
-// api.getDefaultCards().then(res => console.log(res))
-
-// console.log(api);
-
-
-
-
-
-Promise.all([api.getUserInfo(), api.getDefaultCards()]).then(([dataUser, dataCard])=>{
-
-
-  dataCard.forEach( (item) => {
-    item.currentId = dataUser._id
-  })
-  
-
-  userInfo.setUserInfo({
-    userName: dataUser.name,
-    userjob: dataUser.about,
-    userAvatar: dataUser.avatar
-  })
-  sectionClass.addCardArray(dataCard)
-  
-
-})

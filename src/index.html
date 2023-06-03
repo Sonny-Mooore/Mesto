@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- <link rel="stylesheet" href="pages/index.css"> -->
     <title>Mesto</title>
 </head>
-
 <body class="body">
     <div class="wrapper">
         <header class="header">
-            <img class="header__logo" src="./image/logo.svg" alt="логотип">
+            <img class="header__logo" src="<%=require('./image/logo.svg')%> " alt="логотип">
         </header>
         <main>
             <section class="profile">
                 <button type="button" class="profile__avatar-overlay">
-                    <img class="profile__avatar" src="" alt="Жак-Ив Кусто">
+                    <img class="profile__avatar" src="#" alt="">
                 </button>
                 <div class="profile__info">
                     <div class="profile__edit">
@@ -40,7 +39,10 @@
                 <button type="button" class="element__button-trash"></button>
                 <div class="element__about">
                     <h2 class="element__title"></h2>
-                    <button type="button" class="element__button"></button>
+                    <div class="element__container">
+                        <button type="button" class="element__button"></button>
+                        <span class="element__button_like-counter">12</span>
+                    </div>
                 </div>
             </div>
         </template>
@@ -72,7 +74,7 @@
                 <h3 class="popup__text">Новое место</h3>
                 <form method="post" name="popupAddCardForm" class="popup__form">
 
-                    <input name="title" id="card-name" minlength="2" maxlength="30" required  placeholder="Название" value="" class="popup__input popup__input_card_name " type="text">
+                    <input name="name" id="card-name" minlength="2" maxlength="30" required  placeholder="Название" value="" class="popup__input popup__input_card_name " type="text">
 
                     <span id="card-name-error" class="popup__form-error"></span>
 
@@ -123,6 +125,7 @@
             </div>
         </div> 
     </div>    
+<!-- <script type="module" src="./pages/index.js"></script> -->
 </body>
 
 </html>

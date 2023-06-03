@@ -21,7 +21,5 @@ export default class PopupCardDelete extends Popup {
     open = (element) => {
         super.open()
         this._element = element;
-
-
     }
 } 

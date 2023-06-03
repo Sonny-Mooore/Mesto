@@ -3,12 +3,16 @@ export default class Api{
         this._url = parameters.baseUrl
         this._headers = parameters.headers
         this._authorization = parameters.headers.authorization
+        console.log(this._url);
     }
 
     _checkResponse (res) {
         return res.ok ? res.json() : Promise.reject 
     } 
 
+  
+
+        
     getUserInfo(){
         return fetch(`${this._url}/users/me`, {
             headers:{
@@ -23,6 +27,18 @@ export default class Api{
             headers:{
                 authorization: this._authorization
             }
+        }).then(this._checkResponse)
+    }
+    
+    setUserInfo(data){
+        console.log(data);
+        return fetch(`${this._url}/users/me`, {
+            method:'PATCH',
+            header: this._headers, 
+            body: JSON.stringify({
+                name: data.userName, 
+                about: data.userjob
+            })
         }).then(this._checkResponse)
     }
 
