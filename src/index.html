@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Mesto</title>
 </head>
-
 <body class="body">
     <div class="wrapper">
         <header class="header">
-            <img class="header__logo" src="<%=require('./image/logo.svg')%>" alt="логотип">
+            <img class="header__logo" src="<%=require('./image/logo.svg')%> " alt="логотип">
         </header>
         <main>
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./image/ded.png')%>" alt="Жак-Ив Кусто">
+                <button type="button" class="profile__avatar-overlay">
+                    <img class="profile__avatar" src="#" alt="">
+                </button>
                 <div class="profile__info">
                     <div class="profile__edit">
-                        <h1 class="profile__title profile__title_name ">Жак-Ив Кусто</h1>
+                        <h1 class="profile__title profile__title_name "></h1>
                         <button type="button" class="profile__button"></button>
                     </div>
-                    <p class="profile__subtitle">Исследователь океана</p>
+                    <p class="profile__subtitle"></p>
                 </div>
                 <button type="button" class="profile__add-card"></button>
             </section>
@@ -38,22 +39,26 @@
                 <button type="button" class="element__button-trash"></button>
                 <div class="element__about">
                     <h2 class="element__title"></h2>
-                    <button type="button" class="element__button"></button>
+                    <div class="element__container">
+                        <button type="button" class="element__button"></button>
+                        <span class="element__button_like-counter"></span>
+                    </div>
                 </div>
             </div>
         </template>
+
         <div class="popup popup_profile-edit ">
             <div class="popup__container">
                 <button type="button" class="popup__closed"></button>
-                <h3 class="popup__text">Редактировать профиль</h3>
+                <h3 class="popup__text">Редактировать профиль-</h3>
 
                 <form method="post" name="popupEditForm" class="popup__form">
  
-                    <input name="userName" minlength="2" maxlength="40" required id="profile-name" placeholder="Введите имя" value="" class="popup__input popup__input_edit_name " type="text">
+                    <input id="profile-name" name="userName" class="popup__input popup__input_edit_name"  minlength="2" maxlength="40" required  placeholder="Введите имя" value=""  type="text">
 
                     <span id="profile-name-error" class="popup__form-error"></span>
 
-                    <input name="userjob"  minlength="2" maxlength="200" required id="profile-job" placeholder="Расскажите о себе" value="" class="popup__input popup__input_edit_job  " type="text">
+                    <input name="userjob" minlength="2" class="popup__input popup__input_edit_job" maxlength="200" required id="profile-job" placeholder="Расскажите о себе" value=""  type="text">
 
                     <span id="profile-job-error" class="popup__form-error"></span>
 
@@ -69,7 +74,7 @@
                 <h3 class="popup__text">Новое место</h3>
                 <form method="post" name="popupAddCardForm" class="popup__form">
 
-                    <input name="title" id="card-name" minlength="2" maxlength="30" required  placeholder="Название" value="" class="popup__input popup__input_card_name " type="text">
+                    <input name="name" id="card-name" minlength="2" maxlength="30" required  placeholder="Название" value="" class="popup__input popup__input_card_name " type="text">
 
                     <span id="card-name-error" class="popup__form-error"></span>
 
@@ -77,7 +82,7 @@
 
                     <span id="card-link-error" class="popup__form-error"></span>
 
-                    <button type="submit" class="popup__submit popup__submit_card_submit" >Создать</button>
+                    <button type="submit" class="popup__submit popup__submit_card_submit">Создать</button>
 
                 </form>
             </div>
@@ -87,11 +92,40 @@
                 <img src="#" alt="#"  class="popup__zoom-image">
                 <button class="popup__closed"></button>
                 <p  class="popup__zoom-title"></p>
-
             </div>
 
         </div>
-    </div>        
+
+
+        <div class="popup popup_edit_avatar ">
+            <div class="popup__container">
+                <button type="button" class="popup__closed"></button>
+                <h3 class="popup__text">Обновить аватар</h3>
+                <form method="post" name="avatarProfile" class="popup__form">
+
+                    <input name="avatar" id="avatar-link" required  placeholder="Ссылка на аватар" value="" class="popup__input  popup__input_avatar_link" type="url">
+
+                    <span id="avatar-link-error" class="popup__form-error"></span>
+
+                    <button type="submit" class="popup__submit popup__submit_Profile_avatar" >Сохранить</button>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="popup popup_delete-popup ">
+            <div class="popup__container">
+                <button type="button" class="popup__closed"></button>
+                <h3 class="popup__text">Вы уверены?</h3>
+                <form method="post" name="deleteCard" class="popup__form">
+
+                    <button type="submit" class="popup__submit popup__submit_delete_card" >Да</button>
+
+                </form>
+            </div>
+        </div> 
+    </div>    
+
 </body>
 
 </html>
