@@ -1,4 +1,4 @@
-// import './index.css';
+import './index.css';
 import { initialCards, validationConfig } from "../scripts/utils/constants.js";
 import Card from '../scripts/companents/Сard.js'
 import FormValidator from '../scripts/companents/FormValidator.js';
@@ -29,6 +29,7 @@ const profileSubtitleSelector = ".profile__subtitle"
 const popupEditAvatarSelector = '.popup_edit_avatar'
 const popupCardDeleteSelector = '.popup_delete-popup'
 const profileAvatarSelector = '.profile__avatar'
+const defaultTextDelete = 'Да'
 //
 
 const api = new Api({
@@ -78,10 +79,10 @@ const sectionClass = new Section({items: initialCards, renderer: (element) => {
   
  
 const PopupCardDeleteClass = new PopupCardDelete(popupCardDeleteSelector, ({card,cardId}) => {
-  api.deteteCard(cardId).then( () =>{
+  api.deteteCard(cardId).then(() =>{
     card.cardRemove()
     PopupCardDeleteClass.close()
-  }).catch((error => console.error(`Ошибка при удаления карты ${error}`))).finally() 
+  }).catch((error => console.error(`Ошибка при удаления карты ${error}`))).finally(()=> PopupCardDeleteClass.submitButton.textContent = defaultTextDelete)
 
 
 
@@ -100,8 +101,8 @@ const popupAddCardClass = new PopupWithForm(popupAddCardSelector, (data) => {
     dataCard.myid = userInfo.getId()
     sectionClass.addItem(createNewCard(dataCard))
      popupAddCardClass.close()
-  }).catch((error => console.error(`Ошибка при создании новой создания карточки ${error}`)).finally(()=>popupAddCardClass.setDefaultTextButton())
-)})
+  }).catch((error => console.error(`Ошибка при создании новой создания карточки ${error}`))).finally( () => popupAddCardClass.setDefaultTextButton())
+})
 
 popupAddCardClass.setEventListeners()
 
