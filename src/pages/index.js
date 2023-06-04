@@ -1,4 +1,4 @@
-import './index.css';
+// import './index.css';
 import { initialCards, validationConfig } from "../scripts/utils/constants.js";
 import Card from '../scripts/companents/Сard.js'
 import FormValidator from '../scripts/companents/FormValidator.js';
@@ -152,9 +152,17 @@ profileEditButton.addEventListener("click", () => {
 const popupEditAvatarClass = new PopupWithForm(popupEditAvatarSelector, (data)=>{
   api.setAvatar(data).then(res => {
 
-    userInfo.setUserInfo({name: res.name, job: res.about, avatar: res.avatar})})
+    userInfo.setUserInfo({
+        name: res.name,   
+        job: res.about, avatar: 
+        res.avatar
+      }
+    )}).catch((error)=> console.error(`Ошибка при запросе на обновления Аватара ${error}`)).finally(()=> popupEditAvatarClass.setDefaultTextButton())
+
+    
+   
     popupEditAvatarClass.close()
-    .catch((error)=> console.error(`Ошибка при запросе на обновления Аватара ${error}`)).finally(()=> popupEditAvatarClass.setDefaultTextButton())
+ 
   
 
 })
