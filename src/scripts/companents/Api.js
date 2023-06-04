@@ -30,7 +30,6 @@ export default class Api{
     }
     
     setUserInfo(data){
-        // console.log(data);
         return fetch(`${this._url}/users/me`, {
             method:'PATCH',
             headers: this._headers, 
@@ -43,7 +42,6 @@ export default class Api{
 
 
     setAvatar(data){
-        console.log(data);
         return fetch(`${this._url}/users/me/avatar`, {
             method:'PATCH',
             headers: this._headers, 
