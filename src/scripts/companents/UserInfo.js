@@ -13,10 +13,23 @@ export default class UserInfo {
         }
 
     }
+    
+    getId () {
+        return this._id;
+      }
+
+
+    setId (element) {
+        this._id = element;
+      }
+    
+      
 
     setUserInfo({ avatar, userName, userjob }) {
         this._profileAvatar.src = avatar
         this._profileTitle.textContent = userName
         this._profileJob.textContent = userjob
     }
+
+
 }

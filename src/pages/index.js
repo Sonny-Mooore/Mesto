@@ -1,4 +1,4 @@
-// import './index.css';
+import './index.css';
 import { initialCards, validationConfig } from "../scripts/utils/constants.js";
 import Card from '../scripts/companents/Сard.js'
 import FormValidator from '../scripts/companents/FormValidator.js';
@@ -30,6 +30,16 @@ const popupEditAvatarSelector = '.popup_edit_avatar'
 const popupCardDeleteSelector = '.popup_delete-popup'
 const profileAvatarSelector = '.profile__avatar'
 //
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  headers: {
+    authorization: '8a43f496-a272-4f91-9a30-3f0499453648',
+    'Content-Type': 'application/json'
+  }
+})
+
+
 const userInfo = new UserInfo(profileTitleSelector, profileSubtitleSelector,profileAvatarSelector)
 //экземпляры валидации 
 const formAvatarEditValidaton = new FormValidator(validationConfig,popupAvatarEditForm)
@@ -42,10 +52,39 @@ const formAddCardValidaton = new FormValidator(validationConfig, popupAddCardFor
 formAddCardValidaton.enableValidation()
 //
 
+function createNewCard(element) {
+  const elementCard = new Card(element, templateCardSelector, popupWithImageClass.open, PopupCardDeleteClass.open, (likeItem,cardId) => {
+    if (likeItem.classList.contains('element_button-active')) {
+      api.deleteLike(cardId).then(res =>{
+        console.log(res);
+        elementCard.toggleLikes(res.likes)
+      }).catch((error => console.error(`Ошибка при убирания лайка ${error}`))) 
+    } else {
+      api.setLike(cardId).then(res =>{
+        elementCard.toggleLikes(res.likes)
+      }).catch((error => console.error(`Ошибка при создании лайка ${error}`))) 
+    }
+  
+  })
+  return elementCard.renderCard();
+
+}
+
+const sectionClass = new Section({items: initialCards, renderer: (element) => {
+  sectionClass.addItem(createNewCard(element))
+    }
+  }, elementsListSelector)
+  
+  
  
-const PopupCardDeleteClass = new PopupCardDelete(popupCardDeleteSelector, (item) => {
-  item.cardRemove()
-  PopupCardDeleteClass.close()
+const PopupCardDeleteClass = new PopupCardDelete(popupCardDeleteSelector, ({card,cardId}) => {
+  api.deteteCard(cardId).then( () =>{
+    card.cardRemove()
+    PopupCardDeleteClass.close()
+  }).catch((error => console.error(`Ошибка при удаления карты ${error}`))).finally() 
+
+
+
 })
 
 PopupCardDeleteClass.setEventListeners()
@@ -56,22 +95,14 @@ popupWithImageClass.setEventListeners()
 
 
 
-
-function createNewCard(element) {
-  const elementCard = new Card(element, templateCardSelector, popupWithImageClass.open, PopupCardDeleteClass.open)
-  return elementCard.renderCard();
-}
-
-const sectionClass = new Section({items: initialCards, renderer: (element) => {
-sectionClass.addItem(createNewCard(element))
-  }
-}, elementsListSelector)
-
-
 const popupAddCardClass = new PopupWithForm(popupAddCardSelector, (data) => {
-  sectionClass.addItem(createNewCard(data))
-  popupAddCardClass.close()
-})
+  api.addCard(data).then(dataCard =>{
+    dataCard.myid = userInfo.getId()
+    sectionClass.addItem(createNewCard(dataCard))
+     popupAddCardClass.close()
+  }).catch((error => console.error(`Ошибка при создании новой создания карточки ${error}`)).finally(()=>popupAddCardClass.setDefaultTextButton())
+)})
+
 popupAddCardClass.setEventListeners()
 
 profileAddCardButton.addEventListener("click", () => {
@@ -81,13 +112,7 @@ profileAddCardButton.addEventListener("click", () => {
 
 
 
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
-  headers: {
-    authorization: '8a43f496-a272-4f91-9a30-3f0499453648',
-    'Content-Type': 'application/json'
-  }
-})
+
 
 // api.getUserInfo().then(res => console.log(res))
 
@@ -99,7 +124,6 @@ Promise.all([api.getUserInfo(), api.getDefaultCards()]).then(([dataUser, dataCar
   
   userInfo.setUserInfo({userName: dataUser.name, userjob: dataUser.about, avatar: dataUser.avatar})
 
-
   sectionClass.addCardArray(dataCard)
   
 
@@ -110,9 +134,9 @@ Promise.all([api.getUserInfo(), api.getDefaultCards()]).then(([dataUser, dataCar
 const popupProfile = new PopupWithForm(popupEditProfileSelector, (data) => {
   api.setUserInfo(data).then((res) => {
      userInfo.setUserInfo({userName: res.name, userjob: res.about, avatar: res.avatar})
-  }).catch((error)=> console.error(`Ошибка ${error}`)).finally()
+     popupProfile.close()
+  }).catch((error)=> console.error(`Ошибка ${error}`)).finally(()=>popupProfile.setDefaultTextButton())
 
-  popupProfile.close()
 })
 
 popupProfile.setEventListeners()
@@ -123,17 +147,16 @@ profileEditButton.addEventListener("click", () => {
   popupProfile.open()
 });
 
-//catch((error)=> console.error(`Ошибка при запросе на обновления Аватара ${error}`))
+
 
 const popupEditAvatarClass = new PopupWithForm(popupEditAvatarSelector, (data)=>{
-  // document.querySelector('.profile__avatar').src = data.avatar
-  console.log(data);
+  api.setAvatar(data).then(res => {
 
-  api.setAvatar(data).then( res => {
-    userInfo.setUserInfo({userName: res.name, userjob: res.about, avatar: res.avatar})
-  })
+    userInfo.setUserInfo({name: res.name, job: res.about, avatar: res.avatar})})
+    popupEditAvatarClass.close()
+    .catch((error)=> console.error(`Ошибка при запросе на обновления Аватара ${error}`)).finally(()=> popupEditAvatarClass.setDefaultTextButton())
+  
 
-  popupEditAvatarClass.close()
 })
 popupEditAvatarClass.setEventListeners()
 
