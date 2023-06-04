@@ -26,6 +26,28 @@ export const initialCards = [
   },
 ];
 
+export const wrapper = document.querySelector(".wrapper");
+
+export const profileEditButton = wrapper.querySelector(".profile__button");
+export const profileAddCardButton = wrapper.querySelector(".profile__add-card");
+//forms
+export const popupAddCardForm = document.forms.popupAddCardForm;
+export const popupEditForm = document.forms.popupEditForm;
+export const popupAvatarEditForm = document.forms.avatarProfile
+//selectors
+export const popupEditProfileSelector = '.popup_profile-edit';
+export const popupAddCardSelector = ".popup_add-card"
+export const popupZoomSelector = '.popup_zoom'
+
+export const elementsListSelector = ".elements"
+export const templateCardSelector = ".template__card";
+export const profileTitleSelector = ".profile__title"
+export const profileSubtitleSelector = ".profile__subtitle"
+export const popupEditAvatarSelector = '.popup_edit_avatar'
+export const popupCardDeleteSelector = '.popup_delete-popup'
+export const profileAvatarSelector = '.profile__avatar'
+export const defaultTextDelete = 'Да'
+
 export const validationConfig = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit",
@@ -33,9 +55,3 @@ export const validationConfig = {
   inactiveButtonClass: "popup__submit_invalid",
   activeButtonClass: "popup__submit_valid",
 };
-
-// export const profileConfigUser = {
-//    profileTitleSelector :".profile__title",
-//    profileSubtitleSelector : ".profile__subtitle",
-//    profileAvatarSelector: ".profile__avatar"
-// }

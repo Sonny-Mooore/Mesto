@@ -72,7 +72,7 @@ export default class Card {
     _checklikeStatus(){
       this._likes.forEach(element => {
         if (element._id === this._myId) {
-          this._elementlikeButton.classList.toggle("element_button-active");
+          this._elementlikeButton.classList.add("element_button-active");
           return
         } else {
           this._likeCounter.textContent = this._likesArray 

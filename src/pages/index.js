@@ -9,27 +9,28 @@ import PopupWithForm from '../scripts/companents/PopupWithForm.js';
 import PopupCardDelete from '../scripts/companents/PopupCardDelete.js';
 import Api from '../scripts/companents/Api.js';
 
-const wrapper = document.querySelector(".wrapper");
-
-const profileEditButton = wrapper.querySelector(".profile__button");
-const profileAddCardButton = wrapper.querySelector(".profile__add-card");
+import {
+  wrapper,
+  profileEditButton,
+  profileAddCardButton, 
 //forms
-const popupAddCardForm = document.forms.popupAddCardForm;
-const popupEditForm = document.forms.popupEditForm;
-const popupAvatarEditForm = document.forms.avatarProfile
+  popupAddCardForm,  
+  popupEditForm ,
+  popupAvatarEditForm, 
 //selectors
-const popupEditProfileSelector = '.popup_profile-edit';
-const popupAddCardSelector = ".popup_add-card"
-const popupZoomSelector = '.popup_zoom'
+  popupEditProfileSelector, 
+  popupAddCardSelector ,
+  popupZoomSelector ,
+  elementsListSelector, 
+  templateCardSelector ,
+  profileTitleSelector ,
+  profileSubtitleSelector,
+  popupEditAvatarSelector ,
+  popupCardDeleteSelector ,
+  profileAvatarSelector ,
+  defaultTextDelete,
+ } from "../scripts/utils/constants.js";
 
-const elementsListSelector = ".elements"
-const templateCardSelector = ".template__card";
-const profileTitleSelector = ".profile__title"
-const profileSubtitleSelector = ".profile__subtitle"
-const popupEditAvatarSelector = '.popup_edit_avatar'
-const popupCardDeleteSelector = '.popup_delete-popup'
-const profileAvatarSelector = '.profile__avatar'
-const defaultTextDelete = 'Да'
 //
 
 const api = new Api({
@@ -54,7 +55,7 @@ formAddCardValidaton.enableValidation()
 //
 
 function createNewCard(element) {
-  const elementCard = new Card(element, templateCardSelector, popupWithImageClass.open, PopupCardDeleteClass.open, (likeItem,cardId) => {
+  const elementCard = new Card(element, templateCardSelector, popupWithImageClass.open, popupCardDeleteClass.open, (likeItem,cardId) => {
     if (likeItem.classList.contains('element_button-active')) {
       api.deleteLike(cardId).then(res =>{
         console.log(res);
@@ -78,17 +79,17 @@ const sectionClass = new Section({items: initialCards, renderer: (element) => {
   
   
  
-const PopupCardDeleteClass = new PopupCardDelete(popupCardDeleteSelector, ({card,cardId}) => {
+const popupCardDeleteClass = new PopupCardDelete(popupCardDeleteSelector, ({card,cardId}) => {
   api.deteteCard(cardId).then(() =>{
     card.cardRemove()
-    PopupCardDeleteClass.close()
-  }).catch((error => console.error(`Ошибка при удаления карты ${error}`))).finally(()=> PopupCardDeleteClass.submitButton.textContent = defaultTextDelete)
+    popupCardDeleteClass.close()
+  }).catch((error => console.error(`Ошибка при удаления карты ${error}`))).finally(()=> popupCardDeleteClass.submitButton.textContent = defaultTextDelete)
 
 
 
 })
 
-PopupCardDeleteClass.setEventListeners()
+popupCardDeleteClass.setEventListeners()
 
 
 const popupWithImageClass = new PopupWithImage(popupZoomSelector)
@@ -111,13 +112,6 @@ profileAddCardButton.addEventListener("click", () => {
   popupAddCardClass.open()
 });
 
-
-
-
-
-// api.getUserInfo().then(res => console.log(res))
-
-// api.getDefaultCards().then(res => console.log(res))
 
 Promise.all([api.getUserInfo(), api.getDefaultCards()]).then(([dataUser, dataCard]) => {
 
@@ -150,23 +144,22 @@ profileEditButton.addEventListener("click", () => {
 
 
 
-const popupEditAvatarClass = new PopupWithForm(popupEditAvatarSelector, (data)=>{
-  api.setAvatar(data).then(res => {
-
-    userInfo.setUserInfo({
-        name: res.name,   
-        job: res.about, avatar: 
-        res.avatar
-      }
-    )}).catch((error)=> console.error(`Ошибка при запросе на обновления Аватара ${error}`)).finally(()=> popupEditAvatarClass.setDefaultTextButton())
-
-    
-   
-    popupEditAvatarClass.close()
- 
-  
-
-})
+const popupEditAvatarClass = new PopupWithForm(
+  popupEditAvatarSelector,
+  (data) => {
+    api.setAvatar(data).then((res) => {userInfo.setUserInfo({
+          name: res.name,
+          job: res.about,
+          avatar: res.avatar,
+        });
+        popupEditAvatarClass.close();
+      })
+      .catch((error) =>
+        console.error(`Ошибка при запросе на обновления Аватара ${error}`)
+      )
+      .finally(() => popupEditAvatarClass.setDefaultTextButton());
+  }
+);
 popupEditAvatarClass.setEventListeners()
 
 
@@ -177,3 +170,21 @@ const buttonAvatarOverlay  = document.querySelector('.profile__avatar-overlay').
   popupEditAvatarClass.open()
 })
 
+
+
+
+////////
+
+// const popupEditAvatar = new PopupWithFormd(popupAvatarSelector, (data) => {
+//   api.setNewAvatar(data)
+//     .then(res => {userInfo.setUserInfo({
+//         name: res.name,
+//         job: res.about,
+//         avatar: res.avatar
+//       })
+//       popupEditAvatar.close();
+//     })
+//     .catch((error => console.error(`Ошибка обновления аватара ${error}`)))
+//     .finally(() => popupEditAvatar.setDefaultText())
+
+// });
