@@ -10,8 +10,6 @@ export default class Api{
         return res.ok ? res.json() : Promise.reject 
     } 
 
-
-        
     getUserInfo(){
         return fetch(`${this._url}/users/me`, {
             headers:{

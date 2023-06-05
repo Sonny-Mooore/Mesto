@@ -73,7 +73,7 @@ function createNewCard(element) {
 }
 
 const sectionClass = new Section({items: initialCards, renderer: (element) => {
-  sectionClass.addItem(createNewCard(element))
+  sectionClass.addItemAppend(createNewCard(element))
     }
   }, elementsListSelector)
   
@@ -100,7 +100,7 @@ popupWithImageClass.setEventListeners()
 const popupAddCardClass = new PopupWithForm(popupAddCardSelector, (data) => {
   api.addCard(data).then(dataCard =>{
     dataCard.myid = userInfo.getId()
-    sectionClass.addItem(createNewCard(dataCard))
+    sectionClass.addItemPrepend(createNewCard(dataCard))
      popupAddCardClass.close()
   }).catch((error => console.error(`Ошибка при создании новой создания карточки ${error}`))).finally( () => popupAddCardClass.setDefaultTextButton())
 })
@@ -147,11 +147,8 @@ profileEditButton.addEventListener("click", () => {
 const popupEditAvatarClass = new PopupWithForm(
   popupEditAvatarSelector,
   (data) => {
-    api.setAvatar(data).then((res) => {userInfo.setUserInfo({
-          name: res.name,
-          job: res.about,
-          avatar: res.avatar,
-        });
+    api.setAvatar(data).then((res) => {
+     userInfo.setUserInfo({userName: res.name, userjob: res.about, avatar: res.avatar})
         popupEditAvatarClass.close();
       })
       .catch((error) =>
@@ -170,21 +167,3 @@ const buttonAvatarOverlay  = document.querySelector('.profile__avatar-overlay').
   popupEditAvatarClass.open()
 })
 
-
-
-
-////////
-
-// const popupEditAvatar = new PopupWithFormd(popupAvatarSelector, (data) => {
-//   api.setNewAvatar(data)
-//     .then(res => {userInfo.setUserInfo({
-//         name: res.name,
-//         job: res.about,
-//         avatar: res.avatar
-//       })
-//       popupEditAvatar.close();
-//     })
-//     .catch((error => console.error(`Ошибка обновления аватара ${error}`)))
-//     .finally(() => popupEditAvatar.setDefaultText())
-
-// });
